@@ -36,6 +36,10 @@
       - eg: ```{url}/ping``` can be accessed by any user
       - eg: ```{url}/admin``` can only be accessed by admin user
 
+## Key Terms:
+  - username
+  - password
+  - role: authorize controller by different role
 
 ## Encode Password
 Using DelegatingPasswordEncoder for PasswordEncoder
