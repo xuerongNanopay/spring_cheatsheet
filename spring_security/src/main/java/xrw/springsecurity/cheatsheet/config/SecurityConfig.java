@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -18,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -55,14 +57,20 @@ public class SecurityConfig {
   @Bean
   // There is deault DataSource bean in JPA. But always can customize by yourself.
   public UserDetailsService userDetailsService(DataSource dataSource) {
-    // Below are using for testing. Don't inject user into Mysql at here.
-    // UserDetails admin = User.withDefaultPasswordEncoder()
-    //                         .username("admin")
-    //                         .password("adminAb1")
-    //                         .roles("ADMIN", "USER")
-    //                         .build();
     JdbcUserDetailsManager users =new JdbcUserDetailsManager(dataSource);
-    // users.createUser(admin);
+    try {
+      UserDetails admin = users.loadUserByUsername("admin");
+      System.out.println("***Found Admin***");
+    } catch ( UsernameNotFoundException e ) {
+      // Inject a user for demo
+      UserDetails admin = User.withDefaultPasswordEncoder()
+                          .username("admin")
+                          .password("adminAb1")
+                          .roles("ADMIN", "USER")
+                          .build();
+      users.createUser(admin);
+      System.out.println("***Create Admin***");
+    }
     return users;
   }
 
