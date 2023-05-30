@@ -1,5 +1,8 @@
 # Spring Security(6.1.0)
 
+## Setup Mysql before run the application
+  - check MySQL_setup.md
+
 ## Spring Security Servlet Request Flow Architecture
   - using Servlet Filters / Filter Chain design pattern.
   - Spring Filter entry: DelegatingFilterProxy
