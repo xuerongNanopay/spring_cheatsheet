@@ -3,7 +3,11 @@
 ## Architecture
   - using Servlet Filters / Filter Chain design pattern.
   - Spring Filter entry: DelegatingFilterProxy
-  - DelegatingFilterProxy container all Filter beans that are defined in the application.
+  - DelegatingFilterProxy container/get Filter beans that are defined in the application.
+  - DelegatingFilterProxy is using FilterChainProxy to manager security filters
+    - DelegatingFilterProxy -> FilterChainProxy -> SecurityFilterChain -> Filters...
+  - ***FilterChainProxy*** is mapping url to SecurityFilterChain, only invoke first match SecurityFilterChain.
+  - ***ExceptionTranslationFilter inside SecurityFilterChain*** catch error from ```AccessDeniedException``` and ```AuthenticationException``` to the http response
 
 ## Requirement Configuration Bean:
   - ***UserDetailsService***
