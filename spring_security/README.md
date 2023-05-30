@@ -42,7 +42,7 @@
   - role: authorize controller by different role
 
 ## Encode Password
-Using DelegatingPasswordEncoder for PasswordEncoder
+ - Using DelegatingPasswordEncoder for PasswordEncoder
 
 ## TroubleShooting
   - if you are using ```HttpSecurity.formLogin(withDefaults)```, the /login and /logout port will be override
