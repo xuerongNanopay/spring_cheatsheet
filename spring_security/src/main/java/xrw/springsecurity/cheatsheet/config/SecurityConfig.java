@@ -13,11 +13,14 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -37,15 +40,30 @@ public class SecurityConfig {
     return http.build();
   }
 
+  // @Bean
+  // public UserDetailsService userDetailsService() {
+  //   // In production, we should get all records from DB. We should not inject user in the code.
+  //   UserDetails user = User.withDefaultPasswordEncoder()
+  //           .username("admin")
+  //           .password("adminAb1")
+  //           .roles("ADMIN")
+  //           .build();
+  //   System.out.println(user.getUsername() + " : " + user.getPassword());
+  //   return new InMemoryUserDetailsManager(user);
+  // }
+
   @Bean
-  public UserDetailsService userDetailsService() {
-    // In production, we should get all records from DB. We should not inject user in the code.
-    UserDetails user = User.withDefaultPasswordEncoder()
-            .username("admin")
-            .password("adminAb1")
-            .roles("admin")
-            .build();
-    return new InMemoryUserDetailsManager(user);
+  // There is deault DataSource bean in JPA. But always can customize by yourself.
+  public UserDetailsService userDetailsService(DataSource dataSource) {
+    // Below are using for testing. Don't inject user into Mysql at here.
+    // UserDetails admin = User.withDefaultPasswordEncoder()
+    //                         .username("admin")
+    //                         .password("adminAb1")
+    //                         .roles("ADMIN", "USER")
+    //                         .build();
+    JdbcUserDetailsManager users =new JdbcUserDetailsManager(dataSource);
+    // users.createUser(admin);
+    return users;
   }
 
   @Bean
