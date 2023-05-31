@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import Login from './component/Login.js'
-import Logout from './component/Logout.js'
+import { Logout } from './component/Logout.js'
+
 import {
   NavLink, 
   Link, 

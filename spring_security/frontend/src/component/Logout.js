@@ -1,7 +1,7 @@
 import {  Button, Space  } from 'antd';
 import { useState } from 'react'
 
-const Logout = _ => {
+export const Logout = _ => {
   const [ disable, setDisable ] = useState(false)
   const logout = ( e ) => {
     setDisable(true)
@@ -16,4 +16,3 @@ const Logout = _ => {
     </>
   )
 }
-export default Logout
