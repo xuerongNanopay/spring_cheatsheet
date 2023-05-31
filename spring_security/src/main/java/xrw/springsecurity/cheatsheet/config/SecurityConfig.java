@@ -33,7 +33,12 @@ public class SecurityConfig {
     // Override default form login
     http.authorizeHttpRequests(
       (authz) -> 
-      authz.anyRequest().authenticated()
+
+      authz
+        .requestMatchers("/ping").permitAll()
+        .requestMatchers("/admin").hasRole("ADMIN")
+        .requestMatchers("/client").hasRole("USER")
+        .anyRequest().authenticated()
       // Open up all controller.
       // authz.anyRequest().permitAll()
     )

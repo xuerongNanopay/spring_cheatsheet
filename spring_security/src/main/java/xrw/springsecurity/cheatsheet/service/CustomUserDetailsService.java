@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import xrw.springsecurity.cheatsheet.entity.User;
 import xrw.springsecurity.cheatsheet.repository.UserRepository;
 
+// for spring security
 @Service("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService{
 

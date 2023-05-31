@@ -48,7 +48,15 @@
  - Using DelegatingPasswordEncoder for PasswordEncoder
 
 ## UserDetailsService
+  - UserDetailsService is used by ***DaoAuthenticationProvider*** for retrieving a username, a password, and other attributes for authenticating with a username and password.
   - use provided implentation like JdbcUserDetailsManager
-  - implementing UserDetailsService.loadUserbysername
+  - or implementing UserDetailsService.loadUserbysername by customize one.
+
+## DaoAuthenticationProvider
+  - DaoAuthenticationProvider is an ***AuthenticationProvider*** implementation that uses a ***UserDetailsService*** and ***PasswordEncoder*** to authenticate a username and password.
+
+## AuthenticationManager
+  - UsernamePasswordAuthenticationToken -> AuthenticationManager -> ProviderManager -> ... DaoAuthenticationProvider ... -> {UserDetailsService, PasswordEncoder}
+
 ## TroubleShooting
   - if you are using ```HttpSecurity.formLogin(withDefaults)```, the /login and /logout port will be override
