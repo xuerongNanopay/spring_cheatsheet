@@ -15,4 +15,4 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
-    show-sql: false
+    show-sql: true

@@ -20,8 +20,10 @@ public class Authority {
   @Id
   @Column(name = "authority")
   private String authority;
-  @Id@Column(name = "username")
+  @Id
+  @Column(name = "username")
   private String username;
+  
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "username")
   @ToString.Exclude

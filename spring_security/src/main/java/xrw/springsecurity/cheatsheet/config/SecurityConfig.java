@@ -54,25 +54,26 @@ public class SecurityConfig {
   //   return new InMemoryUserDetailsManager(user);
   // }
 
-  @Bean
-  // There is deault DataSource bean in JPA. But always can customize by yourself.
-  public UserDetailsService userDetailsService(DataSource dataSource) {
-    JdbcUserDetailsManager users =new JdbcUserDetailsManager(dataSource);
-    try {
-      UserDetails admin = users.loadUserByUsername("admin");
-      System.out.println("***Found Admin***");
-    } catch ( UsernameNotFoundException e ) {
-      // Inject a user for demo
-      UserDetails admin = User.withDefaultPasswordEncoder()
-                          .username("admin")
-                          .password("adminAb1")
-                          .roles("ADMIN", "USER")
-                          .build();
-      users.createUser(admin);
-      System.out.println("***Create Admin***");
-    }
-    return users;
-  }
+  // @Bean
+  // // There is deault DataSource bean in JPA. But always can customize by yourself.
+  // public UserDetailsService userDetailsService(DataSource dataSource) {
+  //   JdbcUserDetailsManager users =new JdbcUserDetailsManager(dataSource);
+  //   try {
+  //     UserDetails admin = users.loadUserByUsername("admin");
+  //     System.out.println("***Found Admin***");
+  //   } catch ( UsernameNotFoundException e ) {
+  //     // Inject a user for demo
+  //     UserDetails admin = User.withDefaultPasswordEncoder()
+  //                         .username("admin")
+  //                         .password("adminAb1")
+  //                         .roles("ADMIN", "USER")
+  //                         .build();
+  //     users.createUser(admin);
+  //     System.out.println("***Create Admin***");
+  //   }
+  //   return users;
+  // }
+  
 
   @Bean
   public PasswordEncoder passwordEncoder() {

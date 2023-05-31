@@ -1,5 +1,7 @@
 package xrw.springsecurity.cheatsheet.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -20,9 +22,10 @@ public class User {
   private String username;
   @Column(name = "password")
   private String password;
-  @Column(name = "enable")
-  private boolean enabled;
+  @Column(name = "enabled")
+  private boolean enable;
   //MappedBy as mapping refer property name
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-  private Set<Authority> authorities;
+  //Key need to create a default list.
+  private Collection<Authority> authorities = new ArrayList<Authority>();
 }
