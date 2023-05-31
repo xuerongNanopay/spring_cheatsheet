@@ -47,5 +47,8 @@
 ## Encode Password
  - Using DelegatingPasswordEncoder for PasswordEncoder
 
+## UserDetailsService
+  - use provided implentation like JdbcUserDetailsManager
+  - implementing UserDetailsService.loadUserbysername
 ## TroubleShooting
   - if you are using ```HttpSecurity.formLogin(withDefaults)```, the /login and /logout port will be override
