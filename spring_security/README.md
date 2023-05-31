@@ -63,5 +63,12 @@
   2. following request -> verify cookie -> authentication sucess
   3. ***RemeberMeService***
 
+## Microsevice integration:
+  1. session
+  2. token(redis / DB)
+    - find permissions for a user
+    - store the into redis(key: userId, value permission list)
+    - 
+
 ## TroubleShooting
   - if you are using ```HttpSecurity.formLogin(withDefaults)```, the /login and /logout port will be override
