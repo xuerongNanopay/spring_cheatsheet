@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService{
     // TODO Auto-generated method stub
     User user = userRepository.findByUsername(username);
     if ( user == null ) throw new UsernameNotFoundException("No Found User: " + username);
-    System.out.println("Found user: " + user + " : " + user.getAuthorities().size());
+    System.out.println("Found user: " + user);
     return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(user.getAuthorities().stream().map(r -> r.getAuthority()).collect(Collectors.toList())));
   }
   

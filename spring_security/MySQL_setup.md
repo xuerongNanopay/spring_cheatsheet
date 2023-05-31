@@ -34,6 +34,11 @@ create table authorities (
 create unique index idx_auth_username on authoritie(username, authority);
 ```
 
+#### Remember Me
+```
+create table persistent_logins (username varchar(64) not null, series varchar(64) primary key,token varchar(64) not null, last_used timestamp not null);
+```
+
 ## insert default admin
 ```
 //password: adminAb1

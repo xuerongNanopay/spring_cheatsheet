@@ -58,5 +58,10 @@
 ## AuthenticationManager
   - UsernamePasswordAuthenticationToken -> AuthenticationManager -> ProviderManager -> ... DaoAuthenticationProvider ... -> {UserDetailsService, PasswordEncoder}
 
+## Session Flow:
+  1. Authentication suceess -> store session in (cache/DB) -> return cookie to client
+  2. following request -> verify cookie -> authentication sucess
+  3. ***RemeberMeService***
+
 ## TroubleShooting
   - if you are using ```HttpSecurity.formLogin(withDefaults)```, the /login and /logout port will be override
