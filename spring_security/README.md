@@ -70,5 +70,14 @@
     - store the into redis(key: userId, value permission list)
     - 
 
+## Permission System:
+  1. tables:
+    - acl_permission(id, permission)
+    - acl_role(id, role)
+    - acl_user(id, username)
+  2. Relationship tables: user --- manyTomany --- role --- manyTomany --- permission
+    - acl_user_role
+    - acl_role_permission
+
 ## TroubleShooting
   - if you are using ```HttpSecurity.formLogin(withDefaults)```, the /login and /logout port will be override
