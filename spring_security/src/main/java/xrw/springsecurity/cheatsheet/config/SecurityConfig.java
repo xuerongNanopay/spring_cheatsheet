@@ -55,7 +55,8 @@ public class SecurityConfig {
   // }
 
   // @Bean
-  // // There is deault DataSource bean in JPA. But always can customize by yourself.
+  //  // There is deault DataSource bean in JPA. But always can customize by yourself.
+      // Comment out CustomUserDetailsService.java before using this one.
   // public UserDetailsService userDetailsService(DataSource dataSource) {
   //   JdbcUserDetailsManager users =new JdbcUserDetailsManager(dataSource);
   //   try {
@@ -73,7 +74,7 @@ public class SecurityConfig {
   //   }
   //   return users;
   // }
-  
+
 
   @Bean
   public PasswordEncoder passwordEncoder() {
