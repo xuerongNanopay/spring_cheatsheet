@@ -33,3 +33,14 @@ create table authorities (
 ```
 create unique index idx_auth_username on authoritie(username, authority);
 ```
+
+## insert default admin
+```
+//password: adminAb1
+insert into users(username, password, enabled)
+  values('admin', '{bcrypt}$2a$10$NHN1X3wvAEhHRl9iYYalcu4jTbneanEph7Omf5y839nn/SNPFVncK', TRUE);
+```
+```
+insert into authorities(username, authority) values('admin', 'ROLE_ADMIN');
+insert into authorities(username, authority) values('admin', 'ROLE_USER');
+```
