@@ -19,6 +19,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -33,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import javax.sql.DataSource;
 
@@ -60,10 +62,19 @@ public class SecurityConfig {
       formLogin
       .usernameParameter("username")
       .passwordParameter("password")
+      .successHandler(new AuthenticationSuccessHandler() {
+
+        @Override
+        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
+          response.getWriter().println("{code: 201, message: 'Success'}");
+        }
+        
+      })
       .failureHandler(new AuthenticationFailureHandler() {
         @Override
         public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-          response.getWriter().println("Fail ...");
+          response.getWriter().println("{code: 401, message: 'Fail'}");
         }
       })
     );
