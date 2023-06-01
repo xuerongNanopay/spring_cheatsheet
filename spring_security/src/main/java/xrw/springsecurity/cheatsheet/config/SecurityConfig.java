@@ -18,15 +18,22 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import jakarta.servlet.ServletException;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import java.io.IOException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.AuthenticationException;
 import javax.sql.DataSource;
 
 @Configuration
@@ -49,9 +56,25 @@ public class SecurityConfig {
       // Open up all controller.
       // authz.anyRequest().permitAll()
     )
-    .formLogin(withDefaults())
-    .rememberMe(remember -> remember.tokenRepository(persistentTokenRepository()).tokenValiditySeconds(60));
-    //.httpBasic(withDefaults());
+    .formLogin((formLogin) ->
+      formLogin
+      .usernameParameter("username")
+      .passwordParameter("password")
+      .failureHandler(new AuthenticationFailureHandler() {
+        @Override
+        public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+          response.getWriter().println("Fail ...");
+        }
+      })
+    );
+    // .failureHandler(new AuthenticationFailureHandler() {
+    //   @Override
+    //   public void onAuthenticationFailure(HttpRequest request, HttpResponse response, AuthenticationException exception) throws IOException, ServletException {
+
+    //   }
+    // });
+    // .rememberMe(remember -> remember.tokenRepository(persistentTokenRepository()).tokenValiditySeconds(60));
+    // .httpBasic(withDefaults());
     return http.build();
   }
 
