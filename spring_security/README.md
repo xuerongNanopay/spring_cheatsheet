@@ -94,5 +94,12 @@
   - Role-Based Access Control
   - Resource-Based Access Control
 
+## Tips:
+  - Spring Security store session by default.
+  - SecurityContextHolder store Authentication
+  - UsernameAndPasswordFilter -> ProviderManager(AuthenticationManager) -> List of AuthenticationProviders -> (default) DAOAuthenticationProvider
+  - ProviderManager is tree structure: why ? think about uri  /aaa/bbb, /aaa/ccc -> /aaa/ can use same provider Manager
+
+
 ## TroubleShooting
   - if you are using ```HttpSecurity.formLogin(withDefaults)```, the /login and /logout port will be override
