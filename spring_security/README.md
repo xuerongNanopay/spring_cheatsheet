@@ -13,7 +13,12 @@
   - ***ExceptionTranslationFilter inside SecurityFilterChain*** catch error from ```AccessDeniedException``` and ```AuthenticationException``` to the http response
   - ***RequestCache*** 
 
-  - 
+## Spring security filter flow:
+  1. UsernamePasswordAuthenticationFilter(encapsulate username and password)
+  2. ProviderManager
+  3. DaoAuthenticationProvider(get return from InMemoryUserDetailsManager and do authtication)
+  4. InMemoryUserDetailsManager(load userDetail from memory)
+
 ## Authentication Architecture:
   - SecurityContextHolder -> SecurityContext -> Authentication -> {Principle, Credential, Authorities}
   - ***SecurityContextHolder*** is where Spring Security stores the details of who is authenticated
@@ -43,6 +48,11 @@
   - username
   - password
   - role: authorize controller by different role
+
+## Permission model:
+  - Subject: Who(clients)
+  - Resource: What(menu, info, button, order)
+  - Permission: Subject -> Resource
 
 ## Encode Password
  - Using DelegatingPasswordEncoder for PasswordEncoder
@@ -75,9 +85,14 @@
     - acl_permission(id, permission)
     - acl_role(id, role)
     - acl_user(id, username)
-  2. Relationship tables: user --- manyTomany --- role --- manyTomany --- permission
+    - acl_resource: permission --- *:1 --- resource (This one can be conbined with permission to save one table)
+  2. Relationship tables: user --- *:1 --- role --- *:1 --- permission
     - acl_user_role
     - acl_role_permission
+
+## RBAC:
+  - Role-Based Access Control
+  - Resource-Based Access Control
 
 ## TroubleShooting
   - if you are using ```HttpSecurity.formLogin(withDefaults)```, the /login and /logout port will be override
