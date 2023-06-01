@@ -14,11 +14,11 @@
   - ***RequestCache*** 
 
 ## Spring security filter flow:
-  1. UsernamePasswordAuthenticationFilter(encapsulate username and password)
+  1. UsernamePasswordAuthenticationFilter(encapsulate username and password) -- replace with customize one
   2. ProviderManager
   3. DaoAuthenticationProvider(get return from InMemoryUserDetailsManager and do authtication)
   4. InMemoryUserDetailsManager(load userDetail from memory)
-
+  
 ## Authentication Architecture:
   - SecurityContextHolder -> SecurityContext -> Authentication -> {Principle, Credential, Authorities}
   - ***SecurityContextHolder*** is where Spring Security stores the details of who is authenticated
